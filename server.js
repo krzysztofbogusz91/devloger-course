@@ -6,6 +6,8 @@ const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
+const bodyParser = require('body-parser');
+
 const db = require('./config/keys').db;
 
 mongoose
@@ -20,6 +22,9 @@ mongoose
 app.get('/', (req, res) => {
   res.send('Hello');
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/api/users', users);
 app.use('/api/profile', profile);

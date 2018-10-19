@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const passport = require('passport');
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
@@ -18,6 +19,10 @@ mongoose
   .catch(err => {
     console.log('err', err);
   });
+
+app.use(passport.initialize());
+
+require('./config/passport')(passport);
 
 app.get('/', (req, res) => {
   res.send('Hello');
